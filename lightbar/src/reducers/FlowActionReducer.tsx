@@ -1,5 +1,6 @@
 import { ActionType, getType } from 'typesafe-actions'
 import { IFlowState, LightBarStyle } from '../types/FlowState'
+import { WebSettingProvider } from '../helpers/WebSettingProvider';
 
 import * as flowAction from '../actions/FlowAction'
 export type FlowAction = ActionType<typeof flowAction>
@@ -7,9 +8,25 @@ export type FlowAction = ActionType<typeof flowAction>
 export function FlowActionReducer(state: IFlowState | undefined, action: FlowAction){
   if (state === undefined)
   {
+    var initLightBarStyle = LightBarStyle.Sixty;
+    var pr = WebSettingProvider.ProductReference;
+    
+    if (pr.includes('600'))
+    {
+      initLightBarStyle = LightBarStyle.Sixty;
+    } else if (pr.includes('900'))
+    {
+      initLightBarStyle = LightBarStyle.Ninety;
+    } else if (pr.includes('1200'))
+    {
+      initLightBarStyle = LightBarStyle.OneTwety;
+    }
+
+    console.log(pr);
+
     state = {
-      flowStage: 1,
-      lightBarStyle: LightBarStyle.Sixty,
+      flowStage: 0,
+      lightBarStyle: initLightBarStyle,
       isCustomising: false,
       shouldResetSpectrum: false,
       shouldExpandDiodePicker: false,

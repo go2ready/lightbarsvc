@@ -10,9 +10,9 @@ from django.core import serializers
 from rest_framework.views import APIView
 
 # importing the requests library 
-import requests 
-import json
-import urllib
+# import requests 
+# import json
+# import urllib
 
 # Front end app view that loads the app
 class FrontendAppView(View):
@@ -21,7 +21,7 @@ class FrontendAppView(View):
   run build`).
   """
   def get(self, request):
-    product_reference = request.GET.get('product_reference', '')
+    product_reference = request.GET.get('pr', '')
 
     payload = {
       'product_reference': product_reference,
