@@ -72,13 +72,16 @@ export const TopBar = withStyles(styles)(
       this.state = {
         showConfirmationBox: false,
       };
+
+      this.OnScrollToTop = this.OnScrollToTop.bind(this);
+      this.OnLeave = this.OnLeave.bind(this);
+      this.OnNavigateAway = this.OnNavigateAway.bind(this);
+      this.OnLeaveCancel = this.OnLeaveCancel.bind(this);
     }
 
     public render() : JSX.Element {
       const { classes } = this.props;
       const { showConfirmationBox } = this.state;
-
-      var self = this;
 
       return (
         <div className={classes.root}>
@@ -89,10 +92,10 @@ export const TopBar = withStyles(styles)(
               </Typography>
  
               <span className={classes.toolbarButtons}>
-                <IconButton aria-label="go back to homepage" color="inherit" onClick={self.OnLeave}>
+                <IconButton aria-label="go back to homepage" color="inherit" onClick={this.OnLeave}>
                   <HomeIcon />
                 </IconButton>
-                <IconButton aria-label="to the top" color="inherit" onClick={self.OnScrollToTop}>
+                <IconButton aria-label="to the top" color="inherit" onClick={this.OnScrollToTop}>
                   <VerticalAlignTopIcon />
                 </IconButton>
               </span>
@@ -105,22 +108,17 @@ export const TopBar = withStyles(styles)(
             aria-labelledby="help-alert-dialog-title"
             aria-describedby="help-alert-dialog-description"
           >
-            <DialogTitle id="help-alert-dialog-title">{"Shipping from outside the country"}</DialogTitle>
+            <DialogTitle id="help-alert-dialog-title">Leaving your customisation</DialogTitle>
             <DialogContent>
               <DialogContentText id="help-alert-dialog-description">
-                Your light with custom designed spectrum will be specially made for you in our factory, 
-                brefore deliverying to you via express shipping directly to your door 
-                FREE of charge (if you live in remote areas that UPS/USPS/DHL/FEDEX/DPD doesn't cover, please contact us first).
-                {<br/>}{<br/>}
-                However there might be custom duty or import tax which we will not be responsible for, should such charge occurs, they 
-                are normally collected by the shipping company or when you pick it up, please do not confuse them for additional shipping charge.
+                If you leave for the homepage, your current design will be lost, are you sure?
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={self.OnNavigateAway} color="primary">
-                Cancel
+              <Button onClick={this.OnNavigateAway} color="primary">
+                Yes, take me back
               </Button>
-              <Button onClick={self.OnLeaveCancel} color="secondary">
+              <Button onClick={this.OnLeaveCancel} color="secondary">
                 Cancel
               </Button>
             </DialogActions>

@@ -138,8 +138,10 @@ export const CustomFlow = withStyles(styles)(
               </Button>
               <Button
                 onClick={() => self.handleNext()}>
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                {<NavigateNextIcon />}
+                <b>
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                </b>
+                  {<NavigateNextIcon />}
               </Button>
             </ButtonGroup>
 
