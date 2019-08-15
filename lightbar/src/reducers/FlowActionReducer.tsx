@@ -21,9 +21,7 @@ export function FlowActionReducer(state: IFlowState | undefined, action: FlowAct
     {
       initLightBarStyle = LightBarStyle.OneTwety;
     }
-
-    console.log(pr);
-
+    
     state = {
       flowStage: 0,
       lightBarStyle: initLightBarStyle,

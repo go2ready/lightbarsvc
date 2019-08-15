@@ -111,7 +111,10 @@ export const PreviewPanel = withStyles(styles)(
       let diodeSequence = [];
       for (let i = 0; i < cellNumber; i++)
       {
-        diodeSequence.push(<th key={i} className={this.props.classes.diodeth} style={cellStyle}><DiodeContainer index={i}/></th>);
+        diodeSequence.push(
+        <td className={this.props.classes.diodeth} style={cellStyle} key={this.props.lightBarStyle+'diode'+i}>
+            <DiodeContainer index={i}/>
+        </td>);
       }
 
       return diodeSequence;
@@ -124,7 +127,10 @@ export const PreviewPanel = withStyles(styles)(
       let diodeSequence = [];
       for (let i = 1; i <= cellNumber; i++)
       {
-        diodeSequence.push(<th key={i + 'text'} className={this.props.classes.diodeth} style={cellStyle}>#{i}</th>);
+        diodeSequence.push(
+          <td className={this.props.classes.diodeth} style={cellStyle} key={this.props.lightBarStyle+'text'+i}>
+            #{i}
+          </td>);
       }
 
       return diodeSequence;
