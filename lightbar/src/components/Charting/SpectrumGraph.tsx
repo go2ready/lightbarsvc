@@ -148,7 +148,7 @@ export const SpectrumGraph = withStyles(styles)(
       var labels = [];
 
       var counter = 0;
-      for (var _i = 380; _i < 800; _i += 10) {
+      for (var _i = 360; _i < 800; _i += 10) {
         if (counter === 0)
         {
           labels.push(String(_i));

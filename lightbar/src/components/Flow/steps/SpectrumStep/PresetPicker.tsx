@@ -5,6 +5,7 @@ import { withStyles, WithStyles, createStyles  } from '@material-ui/core/styles'
 
 import { LightBarStyle } from '../../../../types/FlowState';
 import { PresetHelper } from '../../helpers/PresetHelper';
+import { WebSettingProvider } from '../../../../helpers/WebSettingProvider';
 
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -41,15 +42,35 @@ export interface IPresetPickerState {
 export const PresetPicker = withStyles(styles)(
   class extends React.Component<IPresetPickerProps, IPresetPickerState>{
 
+    private readonly defaultSelectionValue = 'None';
+
     constructor(props : IPresetPickerProps) {
       super(props);
 
       this.handleChange = this.handleChange.bind(this);
       this.onClick = this.onClick.bind(this);
 
+      var defaultSelection = this.defaultSelectionValue;
+
+      if (WebSettingProvider.isProductAttributeValid)
+      {
+        var mapping = PresetHelper.AttributePreset.get(WebSettingProvider.ProductAttribute);
+        if (mapping !== undefined)
+        {
+          defaultSelection = mapping;
+        }
+      }
+
       this.state = {
-        selected: 'None'
+        selected: defaultSelection
       };
+    }
+
+    public componentDidMount() {
+      if (this.state.selected !== this.defaultSelectionValue)
+      {
+        this.onClick();
+      }
     }
 
     public render() : JSX.Element {

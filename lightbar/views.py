@@ -30,6 +30,7 @@ class FrontendAppView(View):
     payload = {
       'callback_addr': callback_addr,
       'product_reference': product_reference,
+      'product_attribute': product_attribute,
     }
 
     print(payload)

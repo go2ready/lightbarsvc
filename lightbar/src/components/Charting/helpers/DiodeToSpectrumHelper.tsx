@@ -1,5 +1,5 @@
 export class DiodeToSpectrumHelper {
-  public static wlLow: number = 380;
+  public static wlLow: number = 360;
   public static wlHigh: number = 800;
   
   public static GetNarrowDiodeMap (wavelength: string)
@@ -17,6 +17,11 @@ export class DiodeToSpectrumHelper {
       switch(_i)
       {
         case low2:
+          if (wavelength === '380')
+          {
+            values.push(0);
+            break;
+          }
           values.push(0.2);
           break;
         case low1:

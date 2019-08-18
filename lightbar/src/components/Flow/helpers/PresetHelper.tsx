@@ -16,7 +16,7 @@ export class PresetHelper {
     '410',
     '440',
     '470',
-    '460',
+    '420',
     '440',
   ];
 
@@ -48,11 +48,11 @@ export class PresetHelper {
   ];
 
   public static RapidGrowth1200 : string[] = [
+    '420',
     '440',
-    '470',
     '410',
-    '450',
-    '470',
+    '460',
+    '430',
     '450',
     '420',
     '460',
@@ -65,11 +65,11 @@ export class PresetHelper {
     '450',
     '420',
     '470',
-    '450',
+    '410',
     '440',
     '380',
     '450',
-    '470',
+    '410',
     '430',
     '450',
     '470',
@@ -80,7 +80,7 @@ export class PresetHelper {
     '450',
     '440',
     '410',
-    '450',
+    '460',
     '470',
     '430',
     '420',    
@@ -259,6 +259,12 @@ export class PresetHelper {
     '410',
     '380',
   ];
+
+  public static AttributePreset: Map<string, string> = new Map([
+    ['26', 'Rapid Growth'],
+    ['27', 'Nature Sun'],
+    ['28', 'Fluorescent'],
+  ]);
 
   public static PresetMap600: Map<string, string[]> = new Map([
     ['Rapid Growth', PresetHelper.RapidGrowth600],

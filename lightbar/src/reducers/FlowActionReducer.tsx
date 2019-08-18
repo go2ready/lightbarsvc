@@ -10,20 +10,24 @@ export function FlowActionReducer(state: IFlowState | undefined, action: FlowAct
   {
     var initLightBarStyle = LightBarStyle.Sixty;
     var pr = WebSettingProvider.ProductReference;
-    
+    var startingStage = 0;
+
     if (pr.includes('600'))
     {
       initLightBarStyle = LightBarStyle.Sixty;
+      startingStage = 1;
     } else if (pr.includes('900'))
     {
       initLightBarStyle = LightBarStyle.Ninety;
+      startingStage = 1;
     } else if (pr.includes('1200'))
     {
       initLightBarStyle = LightBarStyle.OneTwety;
+      startingStage = 1;
     }
     
     state = {
-      flowStage: 0,
+      flowStage: startingStage,
       lightBarStyle: initLightBarStyle,
       isCustomising: false,
       shouldResetSpectrum: false,
