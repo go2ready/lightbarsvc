@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/static/css/main.6b8889f6.chunk.css",
-    "main.js": "/static/js/main.6586b1b3.chunk.js",
+    "main.js": "/static/js/main.f04a3f83.chunk.js",
     "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
-    "static/js/2.48cf68b8.chunk.js": "/static/js/2.48cf68b8.chunk.js",
+    "static/js/2.85b5153e.chunk.js": "/static/js/2.85b5153e.chunk.js",
     "index.html": "/index.html",
-    "precache-manifest.be89be70d7ab986db43a3262794713b0.js": "/precache-manifest.be89be70d7ab986db43a3262794713b0.js",
+    "precache-manifest.00c1b408c44fa46856aeb0af03ddd388.js": "/precache-manifest.00c1b408c44fa46856aeb0af03ddd388.js",
     "service-worker.js": "/service-worker.js",
     "static/media/saber120.svg": "/static/media/saber120.931ba367.svg",
     "static/media/saber60.svg": "/static/media/saber60.ba565b50.svg",

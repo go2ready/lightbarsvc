@@ -9,6 +9,7 @@ import { SpectrumStepPanelContainer } from '../Flow/steps/containers/SpectrumSte
 import { DiodeValidationHelper } from './helpers/DiodeValidationHelper';
 import { LightBarStyle } from '../../types/FlowState';
 import { NotificationType } from '../../types/NotificationStoreState';
+import { WebSettingProvider } from '../../helpers/WebSettingProvider';
 
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -53,8 +54,6 @@ export interface ICustomFlowProps extends WithStyles<typeof styles> {
 }
 
 export interface ICustomFlowState {
-  canGoBack: boolean;
-  canGoNext: boolean;
 }
 
 export const CustomFlow = withStyles(styles)(
@@ -62,11 +61,6 @@ export const CustomFlow = withStyles(styles)(
 
     constructor(props : ICustomFlowProps) {
       super(props);
-
-      this.state = {
-        canGoBack: true,
-        canGoNext: true,
-      };
 
       this.handleReset = this.handleReset.bind(this);
     }
@@ -91,8 +85,11 @@ export const CustomFlow = withStyles(styles)(
 
     public handleNext() : void {
       var activeStep = this.GetCurrentStep();
+      var totalSteps = this.getSteps();
+      
       if (activeStep === 0)
       {
+        // Step zero validation disable next button so no 
         this.StepZeroValidation();
       } else if (activeStep === 1)
       {
@@ -100,7 +97,17 @@ export const CustomFlow = withStyles(styles)(
         {
           return;
         }
-      }
+      } else if (activeStep === (totalSteps.length - 1))
+      {
+        if (!this.finalStepValidation() || this.props.diodeSequence === undefined)
+        {
+          return;
+        }
+
+        // Final stage, time to navigate back
+        var urlToGo = WebSettingProvider.GetReturnUri(this.props.diodeSequence.join(''));
+        window.location.replace(urlToGo);
+      } 
 
       if (typeof this.props.setFlowStage === 'function' && this.props.flowStage !== undefined)
       {
@@ -176,19 +183,14 @@ export const CustomFlow = withStyles(styles)(
     }
 
     private StepZeroValidation() {
-      if (this.props.lightBarStyle && !this.state.canGoNext)
+      if (this.props.lightBarStyle)
       {
-        this.setState({
-          ...this.state,
-          canGoNext: true,
-        });
+        return true;
       } 
-      else if (!this.props.lightBarStyle && this.state.canGoNext)
+      else if (!this.props.lightBarStyle)
       {
-        this.setState({
-          ...this.state,
-          canGoNext: false,
-        });
+        this.SetShouldShow(true, 'You must select a model', 5000, 'warning');
+        return false;
       }
     }
 
@@ -217,9 +219,31 @@ export const CustomFlow = withStyles(styles)(
 
           return false;
         }
+        else
+        {
+          // Only valid case
+          return true;
+        }
       }
 
-      return true;
+      return false;
+    }
+
+    private finalStepValidation() {
+      if (this.props.diodeSequence)
+      {
+        var invalidDiodes = DiodeValidationHelper.IsValid(this.props.diodeSequence);
+        
+        // Valid
+        if (invalidDiodes.length === 0 && WebSettingProvider.isReturnURLValid())
+        {
+          return true;
+        }
+      }
+
+      this.SetShouldShow(true, 'We are sorry seems that something went wrong on our end, please contact us or try again', 5000, 'error');
+
+      return false;
     }
 
     private SetShouldShow(shouldShow: boolean, message: string, autoHideTimer?: number, type?: NotificationType)

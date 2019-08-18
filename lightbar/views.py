@@ -29,6 +29,7 @@ class FrontendAppView(View):
       'product_reference': product_reference,
     }
 
+    print(payload)
     try:
       return render(request, 'lightbar/build/index.html', payload)
     except FileNotFoundError:

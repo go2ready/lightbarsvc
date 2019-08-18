@@ -8,9 +8,12 @@ https://docs.djangoproject.com/en/2.2/howto/deployment/wsgi/
 """
 
 import os
+import sys
+
+sys.path.append('/opt/bitnami/apps/django/django_projects/lightbarsvc')
+os.environ.setdefault("PYTHON_EGG_CACHE", "/opt/bitnami/apps/django/django_projects/lightbarsvc/egg_cache")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lightbarsvc.settings")
 
 from django.core.wsgi import get_wsgi_application
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'lightbarsvc.settings')
 
 application = get_wsgi_application()
