@@ -21,8 +21,11 @@ class FrontendAppView(View):
   run build`).
   """
   def get(self, request):
-    callback_addr = "http://51.140.8.145/en/module/ps_buybuttonlite/RedirectManager?id_product=2\&action=1\&id_product_attribute=11\&custom_text="
     product_reference = request.GET.get('pr', '')
+    product_id = request.GET.get('pi', '')
+    product_attribute = request.GET.get('pa', '')
+
+    callback_addr = "http://51.140.8.145/en/module/ps_buybuttonlite/RedirectManager?id_product={0}\&action=1\&id_product_attribute={1}\&custom_text=".format(product_id, product_attribute)
 
     payload = {
       'callback_addr': callback_addr,
