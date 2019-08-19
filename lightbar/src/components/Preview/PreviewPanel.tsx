@@ -6,7 +6,6 @@ import { withStyles, WithStyles, createStyles  } from '@material-ui/core/styles'
 import { LightBarStyle } from '../../types/FlowState';
 import { DiodeContainer } from './containers/DiodeContainer';
 import { PanelStyleHelper } from './helpers/PanelStyleHelper';
-import { WebSettingProvider } from '../../helpers/WebSettingProvider';
 
 import light60 from './rsw/saber60.svg';
 import light90 from './rsw/saber90.svg';

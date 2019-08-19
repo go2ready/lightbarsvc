@@ -57,8 +57,6 @@ export const Footer = withStyles(styles)(
       const { classes, flowStage } = this.props;
       const { helpOpen } = this.state;
 
-      var self = this;
-
       var notationContent = this.getNotationBasedonFlowStage(flowStage);
 
       return (

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 
 import { Theme } from '@material-ui/core/styles/createMuiTheme';

@@ -19,7 +19,6 @@ import ErrorIcon from '@material-ui/icons/Error';
 import InfoIcon from '@material-ui/icons/Info';
 import WarningIcon from '@material-ui/icons/Warning';
 import Slide from '@material-ui/core/Slide';
-import transitions from '@material-ui/core/styles/transitions';
 
 const variantIcon = {
   success: CheckCircleIcon,
