@@ -21,6 +21,12 @@ import Divider from '@material-ui/core/Divider';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 const styles = (theme: Theme) => createStyles({
   root: {
     textAlign: 'center',
@@ -53,6 +59,8 @@ export interface ICustomFlowProps extends WithStyles<typeof styles> {
 }
 
 export interface ICustomFlowState {
+  showPresetDialog: boolean;
+  presetValue: string;
 }
 
 export const CustomFlow = withStyles(styles)(
@@ -61,7 +69,33 @@ export const CustomFlow = withStyles(styles)(
     constructor(props : ICustomFlowProps) {
       super(props);
 
+      this.state = {
+        showPresetDialog: false,
+        presetValue: '',
+      }
+
       this.handleReset = this.handleReset.bind(this);
+      this.handleBack = this.handleBack.bind(this);
+      this.handleNext = this.handleNext.bind(this);
+
+      this.handleAddCustomRequest = this.handleAddCustomRequest.bind(this);
+      this.handleAddPresetRequest = this.handleAddPresetRequest.bind(this);
+      this.handlePresetDialogClose = this.handlePresetDialogClose.bind(this);
+    }
+
+    public handleAddPresetRequest(): void {
+      // TODO: add url builder helper
+    }
+
+    public handleAddCustomRequest(): void {
+
+    }
+
+    public handlePresetDialogClose(): void {
+      this.setState({
+        ...this.state,
+        showPresetDialog: false,
+      });
     }
 
     public handleReset() : void {
@@ -117,6 +151,7 @@ export const CustomFlow = withStyles(styles)(
     } 
 
     public render() : JSX.Element {
+      const { showPresetDialog, presetValue } = this.state;
       const { classes } = this.props;
       var self = this;
 
@@ -155,6 +190,28 @@ export const CustomFlow = withStyles(styles)(
 
             {stepContent}
           </div>
+
+          <Dialog
+            open={showPresetDialog}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{"The spectrum you chose matched our preset!"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Great minds thinks alike! The spectrum you chose is the same as
+                <b>{presetValue}</b> that we have, we will just add that to your cart then, is that okay?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handlePresetDialogClose} color="secondary">
+                No
+              </Button>
+              <Button onClick={this.handleAddPresetRequest} color="primary" autoFocus>
+                Yes
+              </Button>
+            </DialogActions>
+          </Dialog>
         </div>
       );
     }
