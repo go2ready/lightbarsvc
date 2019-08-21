@@ -25,7 +25,7 @@ class FrontendAppView(View):
     product_id = request.GET.get('pi', '')
     product_attribute = request.GET.get('pa', '')
 
-    callback_addr = "http://51.140.8.145/module/ps_buybuttonlite/RedirectManager?id_product={0}\&action=1\&id_product_attribute={1}\&custom_text=".format(product_id, product_attribute)
+    callback_addr = "http://51.140.8.145/module/ps_buybuttonlite/RedirectManager?id_product={0}\&action=1".format(product_id, product_attribute)
 
     payload = {
       'callback_addr': callback_addr,
