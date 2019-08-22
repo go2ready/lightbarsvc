@@ -26,17 +26,21 @@ export class DiodeValidationHelper
     if (lightBarStyle !== undefined)
     {
       var spectrumMap = DiodeValidationHelper.GetSpectrumMap(lightBarStyle);
+      var resultkey = undefined;
       spectrumMap.forEach((value: string[], key: string) => {
         var mapValue = value.join('');
         var diodeValue = diodeSequence.join('');
+        console.log(key);
+        console.log(mapValue);
+        console.log(diodeValue);
         if (mapValue === diodeValue)
         {
-          return key;
+          resultkey = key;
         }
       });
     }
 
-    return undefined;
+    return resultkey;
   }
 
   private static GetLightbarStyleByDiodeSeq(diodeSequence: string[]): LightBarStyle | undefined

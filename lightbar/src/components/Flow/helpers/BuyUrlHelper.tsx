@@ -1,10 +1,10 @@
-import { LightBarStyle } from '../../../../types/FlowState';
-import { WebSettingProvider } from '../../../../helpers/WebSettingProvider';
+import { LightBarStyle } from '../../../types/FlowState';
+import { WebSettingProvider } from '../../../helpers/WebSettingProvider';
 
 export class BuyUrlHelper {
   private static customProductAttribute: number = 26; // TODO: change this to the custom product attribute
 
-  public static ConstructBuyUrl(style : LightBarStyle, bracket: boolean, preset: string | undefined) : string | undefined {
+  public static ConstructBuyUrl(style : LightBarStyle, bracket: boolean, preset: string | undefined = undefined) : string | undefined {
     // http://51.140.8.145/module/ps_buybuttonlite/RedirectManager?id_product={0}\&action=1\&id_product_attribute={1}\&custom_text=
     if (WebSettingProvider.isReturnURLValid())
     {

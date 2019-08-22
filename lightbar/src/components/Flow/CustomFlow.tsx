@@ -10,6 +10,7 @@ import { DiodeValidationHelper } from './helpers/DiodeValidationHelper';
 import { LightBarStyle } from '../../types/FlowState';
 import { NotificationType } from '../../types/NotificationStoreState';
 import { WebSettingProvider } from '../../helpers/WebSettingProvider';
+import { BuyUrlHelper } from './helpers/BuyUrlHelper';
 
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -84,11 +85,25 @@ export const CustomFlow = withStyles(styles)(
     }
 
     public handleAddPresetRequest(): void {
-      // TODO: add url builder helper
+      if (this.props.lightBarStyle !== undefined && this.props.diodeSequence !== undefined)
+      {
+        var urlToGo = BuyUrlHelper.ConstructBuyUrl(this.props.lightBarStyle, false);
+        if (urlToGo !== undefined)
+        {
+          window.location.replace(urlToGo);
+        }
+      }
     }
 
     public handleAddCustomRequest(): void {
-
+      if (this.props.lightBarStyle !== undefined && this.props.diodeSequence !== undefined)
+      {
+        var urlToGo = BuyUrlHelper.ConstructBuyUrl(this.props.lightBarStyle, false, this.props.diodeSequence.join(''));
+        if (urlToGo !== undefined)
+        {
+          window.location.replace(urlToGo);
+        }
+      }
     }
 
     public handlePresetDialogClose(): void {
@@ -137,9 +152,28 @@ export const CustomFlow = withStyles(styles)(
           return;
         }
 
-        // Final stage, time to navigate back
-        var urlToGo = WebSettingProvider.GetReturnUri(this.props.diodeSequence.join(''));
-        window.location.replace(urlToGo);
+        // Final stage, check preset and navigate
+        var preset = DiodeValidationHelper.IsPreset(this.props.diodeSequence)
+        console.log(preset);
+        if (preset === undefined)
+        {
+          // No preset match
+          this.handleAddCustomRequest();
+
+          // Do not advance
+          return;
+        }
+        else
+        {
+          // Preset match, show dialog
+          this.setState({
+            showPresetDialog: true,
+            presetValue: preset,
+          });
+
+          // Do not advance
+          return;
+        }
       } 
 
       if (typeof this.props.setFlowStage === 'function' && this.props.flowStage !== undefined)
@@ -199,8 +233,7 @@ export const CustomFlow = withStyles(styles)(
             <DialogTitle id="alert-dialog-title">{"The spectrum you chose matched our preset!"}</DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
-                Great minds thinks alike! The spectrum you chose is the same as
-                <b>{presetValue}</b> that we have, we will just add that to your cart then, is that okay?
+                Great minds thinks alike! The spectrum you chose is the same as <b>{presetValue}</b> that we have, we will just add that to your cart then, is that okay?
               </DialogContentText>
             </DialogContent>
             <DialogActions>

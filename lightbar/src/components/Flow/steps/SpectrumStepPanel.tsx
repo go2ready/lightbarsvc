@@ -69,7 +69,6 @@ export const SpectrumStepPanel = withStyles(styles)(
     public render() : JSX.Element {
       const { classes } = this.props;
 
-      console.log('customising:' + this.props.isCustomising);
       return (
         <div className={classes.root}>
           <CustomAckContainer />

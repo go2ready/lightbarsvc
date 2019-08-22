@@ -5,10 +5,10 @@ export class WebSettingProvider {
   public static ProductReference: string = (window as any).productReference;
 
   public static isReturnURLValid () {
-    return WebSettingProvider.ReturnURL !== '' && WebSettingProvider.ReturnURL !== '{{ callback_addr }}';
+    return WebSettingProvider.ReturnURL !== '';
   }
 
   public static isProductAttributeValid () {
-    return WebSettingProvider.ProductAttribute !== '' && WebSettingProvider.ProductAttribute !== '{{ product_attribute }}';
+    return WebSettingProvider.ProductAttribute !== '';
   }
 }
